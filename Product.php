@@ -87,14 +87,14 @@ if ($user_logged_in) {
                 <div class="col-md-3">
                 <div class="grid-item text-center p-3" style="background-color: #D9D9D9;">
                     <img src="./images/item-1.jpg" alt="item" class="img-fluid p-3">
-                    <a href="Product-1.html"><h6>V-Tech Soil Moisture Sensor</h6></a>
+                    <a href="Product-1.php"><h6>V-Tech Soil Moisture Sensor</h6></a>
                     <p>Price: 12500</p>
                 </div>
                 </div>
                 <div class="col-md-3">
                 <div class="grid-item text-center p-3" style="background-color: #D9D9D9;">
                     <img src="./images/item-2.jpg" alt="item" class="img-fluid p-3">
-                    <a href="Product-2.html">  <h6>Embsys Soil Moisture Sensor</h6></a>
+                    <a href="Product-2.php">  <h6>Embsys Soil Moisture Sensor</h6></a>
                     <p>Price: 3000</p>
                 </div>
                 </div>
@@ -108,7 +108,7 @@ if ($user_logged_in) {
             <div class="col-md-3">
             <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
                 <img src="./images/item-3.jpg" alt="item" class="img-fluid p-3">
-                <a href="Product-3.html"><h6>VT-SRS01 Snow & Rain Sensor, For Industrial</h6></a>
+                <a href="Product-3.php"><h6>VT-SRS01 Snow & Rain Sensor, For Industrial</h6></a>
                 <p>Price: 13500</p>
             </div>
             </div>
@@ -122,7 +122,7 @@ if ($user_logged_in) {
             <div class="col-md-3">
             <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
                 <img src="./images/item-4.jpg" alt="item" class="img-fluid p-3"style="height: 170px;width:200px;">
-                <a href="Product-4.html"><h6>Wind Speed And Direction Sensor</h6></a>
+                <a href="Product-4.php"><h6>Wind Speed And Direction Sensor</h6></a>
                 <p>Price: 25000</p>
 
             </div>
@@ -130,7 +130,7 @@ if ($user_logged_in) {
             <div class="col-md-3">
             <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
                 <img src="./images/item-5.jpg" alt="item" class="img-fluid p-3">
-                <a href="Product-5.html"><h6>Wind Speed Sensor, Anemometer</h6></a>
+                <a href="Product-5.php"><h6>Wind Speed Sensor, Anemometer</h6></a>
                 <p>Price: 6900</p>
             </div>
             </div>
