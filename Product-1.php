@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="background">
-        <a href="Product.html"><button class="mb-2" style="border: none;"><i class="fa-sharp fa-solid fa-arrow-left"></i></button></a>
+        <a href="Product.php"><button class="mb-2" style="border: none;"><i class="fa-sharp fa-solid fa-arrow-left"></i></button></a>
         <div class="row">
             <div class="col-sm-5">
             <img src="./images/item-1.jpg" class="img-thumbnail" alt="item">

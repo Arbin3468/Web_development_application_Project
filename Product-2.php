@@ -15,45 +15,40 @@
 </head>
 <body>
     <div class="background">
-      <a href="Product.html"><button class="mb-2" style="border: none;"><i class="fa-sharp fa-solid fa-arrow-left"></i></button></a>
+      <a href="Product.php"><button class="mb-2" style="border: none;"><i class="fa-sharp fa-solid fa-arrow-left"></i></button></a>
         <div class="row">
             <div class="col-sm-5">
-              <img src="./images/item-5.jpg" class="img-thumbnail" alt="item">
+              <img src="./images/item-2.jpg" class="img-thumbnail" alt="item">
             </div>
             <div class="col-sm-5">
-            <h2 class="text-center">Wind Speed Sensor, Anemometer</h2> 
-            <p class="text-center price">Price: 6900</p>
+            <h2 class="text-center">Embsys Soil Moisture Sensor</h2> 
+            <p class="text-center price">Price: 3000</p>
             <h6>Product Description</h6>
-            <p>The Monad wireless wind speed sensor (Anemometer) features a high 
-                quality 3-cup/4-cup rotor anemometer rotor provides a linear response to 
-                wind speed made of a durable, lightweight material that ensures fast 
-                response and low inertia</p>
-
+            <p>Power supply: DC 4.5-30V<br>
+                Maximum power consumption: 0.5W (24V DC power supply)<br>
+                Protection grade: IP68<br>
+                Probe material: Anti-corrosion special electrode<br>
+                Sealing material: Black flame-retardant epoxy resin<br>
+                The default cable length: 2 meters<br>
+                Dimensions: 45*15*123mm<br>
+                Output signal: RS485</p>
                 <h6>Product Specification</h6>
                 <table>
                     <tr>
-                        <th>Output</th>
-                        <td>0.4V to 2V</td>
+                        <th>Brand</th>
+                        <td>Embsys</td>
                     </tr>
                     <tr>
-                        <th>Testing Range</th>
-                        <td>0.5m/s to 50m/s</td>
+                        <th>parameters</th>
+                        <td>Moisture</td>
                     </tr>
                     <tr>
-                        <th>Start wind speed</th>
-                        <td>0.2 m/s</td>
+                        <th>Range</th>
+                        <td>0-100%</td>
                     </tr>
                     <tr>
-                        <th>Resolution</th>
-                        <td>0.1m/s</td>
-                    </tr>
-                    <tr>
-                        <th>Accuracy</th>
-                        <td>Worst case 1 m/s</td>
-                    </tr>
-                    <tr>
-                        <th>Max Wind Speed</th>
-                        <td>70m/s</td>
+                        <th>Country of Origin</th>
+                        <td>Made in India</td>
                     </tr>
                     <tr>
                         <th>Minimum Order Quantity</th>
@@ -65,13 +60,14 @@
                     <button id="decrementBtn" class="mr-1">-</button>
                     <input type="text" id="quantityInput" value="1">
                     <button id="incrementBtn" class="ml-1">+</button>
-                </div>
-                <button id="buyNowBtn" class="button">Buy Now</button>
-            <button type="button" class="btn  button" data-toggle="modal" data-target="#exampleModal">
-                Add to cart
-            </button>
-            </div>
-            <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+                  </div>
+                  
+                  <button id="buyNowBtn" class="button">Buy Now</button>
+                <button type="button" class="btn  button" data-toggle="modal" data-target="#exampleModal">
+                  Add to cart
+              </button>
+              </div>
+              <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -128,7 +124,7 @@
         
             buyNowBtn.addEventListener('click', function() {
                 const quantity = parseInt(quantityInput.value);
-                const price = 6900;
+                const price = 3000;
                 const totalAmount = quantity * price;
         
                 document.getElementById('amount').value = totalAmount.toLocaleString('en-IN');
@@ -150,23 +146,23 @@
         });
         
             </script>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Item has been added to cart</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="your_cart.html"><button type="button" class="btn btn-primary">Go to cart</button></a>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Item has been added to cart</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="your_cart.html"><button type="button" class="btn btn-primary">Go to cart</button></a>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
     </div>
 </body>
 </html>
