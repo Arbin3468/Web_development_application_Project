@@ -91,29 +91,32 @@ if ($user_logged_in) {
     overflow: hidden;
 }
 .welcome{
-    letter-spacing: 7%;
-    margin-top: 22vh;
-    width: 60%;
-    min-height: 50vh;
+    padding-top: 12px;
+    text-align: center;
+    letter-spacing: 2%;
+    margin-top: 15vh;
+    width: 50%;
     height: 45vh;
     background-color:rgba(182, 223, 186,.60);
+    border-radius: 10px;
 }
 .welcome h3 {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 2vw;
-            line-height: 35px;
-            align-items: center;
-            text-align: center;
-            letter-spacing: 0.05em;
-            color: #178B23;
+    margin-top: 30px;
+    margin-left: -300px;
+    font-weight: bold;
+    letter-spacing: 5%;
+    width: 60vw;
+    height: 10vh;
+    font-size: 200%;
         }
 .welcome p {
+        
+            margin-top: 5px;
             font-style: normal;
             font-weight: 500;
-            font-size: 1.5vw;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            font-size: 1 vw;
+            height: 40px;
+            letter-spacing: 0.05em;
             color: #432F24;
         }
         .showcase {
@@ -155,16 +158,16 @@ if ($user_logged_in) {
             font-style: normal;
             font-weight: 500;
             font-size: 1.6em;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            line-height: 45px;
+            letter-spacing: 0em;
             color: #432F24;
         }
         #main2 p {
             font-style: normal;
             font-weight: 500;
             font-size: 1.6em;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            line-height: 45px;
+            letter-spacing: 0em;
             color: #432F24;
         }
 
@@ -237,23 +240,8 @@ color: #432F24;
         width: 20vw;
     }
     }
-    .profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: white;
-    object-fit: cover; /* Ensures images scale properly */
-    border: 2px solid #ffffff;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    margin-left: 240px;
-    position: relative;
-}
 
-.profile-pic:hover {
-    transform: scale(1.1); /* Slight zoom effect */
-    box-shadow: 12px 12px 10px rgba(255, 255, 255, 0.5);
-}
-        }
+       }
     </style>
     <title>Irrigation hub</title>
 </head>
@@ -298,8 +286,8 @@ color: #432F24;
     </nav>
     
         <div class="container">
-        <div class="welcome text-center">
-            <h3>What is a Smart Irrigation System?</h3>
+        <div class="welcome text-align:center">
+            <h3>Smart Irrigation System</h3>
             <p class="font-weight-bold">Smart irrigation systems are a combination of advanced technology of sprinklers with nozzles that improve coverage and watering irrigation controllers and water conservation systems that monitor moisture-related conditions on your property and automatically adjust watering to optimal levels.</p>
     </div>
     </div>

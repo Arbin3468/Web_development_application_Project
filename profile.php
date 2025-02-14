@@ -87,6 +87,13 @@ if (isset($_POST['delete_account'])) {
     }
 }
 
+// Logout session
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
 $stmt->close();
 $conn->close();
 ?>
@@ -130,6 +137,10 @@ $conn->close();
 
         <form action="profile.php" method="POST" class="mt-4">
             <button type="submit" name="delete_account" class="btn btn-danger">Delete Account</button>
+        </form>
+
+        <form action="profile.php" method="POST" class="mt-4">
+            <button type="submit" name="logout" class="btn btn-secondary">Logout</button>
         </form>
     </div>
 
