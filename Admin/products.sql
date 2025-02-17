@@ -40,10 +40,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `created_at`) VALUES
-(2, 'puks dai', 'free ko maal', 99999999.99, 'mario.png', '2025-02-16 14:08:34'),
-(3, 'hero', 'ma j chu thik chu', 99999999.99, 'Cute Gojo Satoru & Itadori Yuji.jfif', '2025-02-16 14:24:50'),
-(5, 'Sukuti masu', 'muji randi', 47788.00, 'Follow me on instagram_ huongg_thu14_Thank you 💕.jfif', '2025-02-16 14:45:15');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `created_at`) VALUES;
 
 --
 -- Indexes for dumped tables

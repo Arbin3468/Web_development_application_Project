@@ -132,6 +132,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
         </div>
 
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <textarea class="form-control" id="price" name="price" rows="5" required></textarea>
+        </div>
+
         <h5>Product Specifications</h5>
 
         <div class="form-group">
