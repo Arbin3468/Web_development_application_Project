@@ -40,29 +40,32 @@ a:hover{
 .login-btn a{
     text-decoration: none;
     width:8vw;
-    font-size: 20px;
     font-weight: bold;
-    border-radius: 15px;
-    background-color: #0082CE;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color:#183647;
+    margin-left: 60px;
+    position: absolute;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .container h2{
     font-family: 'Inter';
 font-style: normal;
 font-weight: 700;
-font-size: 30px;
+font-size: 20px;
 line-height: 36px;
 color: #178B23;
 }
 #main-footer{
-    margin-top: 40px;
+    margin-bottom: 50px;
     background: #333;
     color: #f4f4f4;
     text-align: center;
     padding: 40px;
     font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
 }
 .col-md-3 a{
     font-family: 'Inter';
@@ -85,4 +88,71 @@ color: #000000;
     .login-btn a{
         width: 20vw;
     }
+}
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px; /* Uniform image size */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #007b5e;
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #28a745;
+}
+/* Product Detail Page Image Styling */
+.product-detail-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover; /* Ensures image scales nicely */
+    border-radius: 10px;
+}
+
+/* Product Detail Title Styling */
+.product-detail-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007b5e;
+}
+
+/* Buy Now Button Styling on Product Detail Page */
+.product-detail-buy-now-btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-detail-buy-now-btn:hover {
+    background-color: #218838;
+    cursor: pointer;
 }

@@ -63,14 +63,17 @@ if ($user_logged_in) {
             color: #ffffff;
         }
 
-        .login-btn a {
+        .login-btn a{
             text-decoration: none;
-            width: 8vw;
-            font-size: 20px;
+            width:8vw;
             font-weight: bold;
-            border-radius: 15px;
-            background-color: #0082ce;
-        }
+            font-size: 20px;
+            border-radius: 10px;
+            background-color:#183647;
+            margin-left: 60px;
+            position: absolute;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
         .clr{
             background-color:#0082CE;
             color: #D9D9D9;

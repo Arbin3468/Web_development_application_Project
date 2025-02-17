@@ -1,6 +1,7 @@
 <?php
 session_start();
-include 'config/db.php'; // Ensure database connection
+
+include 'config/db.php'; // Ensure database connection for user side
 
 $user_logged_in = isset($_SESSION["user_id"]);
 $profile_picture = ""; // Remove default pic handling
@@ -24,9 +25,20 @@ if ($user_logged_in) {
         }
     }
 }
+
+include 'Admin/db.php'; // Database connection for admin side
+
+// Fetch all products from the database (only if user is logged in)
+$products = [];
+if ($user_logged_in) {
+    $query = "SELECT * FROM products";
+    $result = $conn->query($query);
+    while ($row = $result->fetch_assoc()) {
+        $products[] = $row;
+    }
+}
 ?>
 
-sdsbakhads
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,107 +50,69 @@ sdsbakhads
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="Product.css".css>
-    <title>Irrigation hub</title>
+    <link rel="stylesheet" href="Product.css">
+    <title>Irrigation Hub</title>
 </head>
-<div class="images">
-    <nav class="navbar navbar-expand-lg navbar-light " style="background-color:rgb(7, 105, 16);">
-        <img class="navbar-brand" src="./images/logo.jpg" style="width:200px; height: 60px; border: radius 20px;">
-        <button class="clr navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=" brgclr navbar-toggler-icon" ></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <div  class="d-flex justify-content-center align-items-center" style="width: 70vw;">
-                <div>
-                    <ul class="navbar-nav mr-auto mt-2">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Home </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="blog.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Product.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php#contact" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Contact us</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <?php if ($user_logged_in && !empty($profile_picture)): ?>
-                <a href="profile.php">
-                <a href="profile.php">
-                <img src="<?php echo htmlspecialchars($profile_picture); ?>"  alt="Profile" style="width: 50px; height: 50px;  border-radius: 50%; background-color: white; object-fit: cover; /* Ensures images scale properly */ border: 2px solid #ffffff;
-                                                                                                   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; margin-left: 240px; position: relative;">
-                </a>
-            <?php else: ?>
-                <div class="form-inline login-btn">
-                    <a class="nav-item text-center text-white" href="login.php">Log In</a>
-                </div>
-            <?php endif; ?>
-        </div>
-    </nav>
-        <div class="container" style="margin-top: 30px;">
-            <h2>Soil moisture sensor</h2>
-            
-            <div class="container" style="margin-top:30px">
-            <div class="row" style="row-gap: 10px;">
-                <div class="col-md-3">
-                <div class="grid-item text-center p-3" style="background-color: #D9D9D9;">
-                    <img src="./images/item-1.jpg" alt="item" class="img-fluid p-3">
-                    <a href="Product-1.php"><h6>V-Tech Soil Moisture Sensor</h6></a>
-                    <p>Price: 12500</p>
-                </div>
-                </div>
-                <div class="col-md-3">
-                <div class="grid-item text-center p-3" style="background-color: #D9D9D9;">
-                    <img src="./images/item-2.jpg" alt="item" class="img-fluid p-3">
-                    <a href="Product-2.php">  <h6>Embsys Soil Moisture Sensor</h6></a>
-                    <p>Price: 3000</p>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="container" style="margin-top: 30px;">
-        <h2>Rain and snow sensor</h2>
-        <div class="container" style="margin-top:30px">
-            <div class="row" style="row-gap: 10px;">
-            <div class="col-md-3">
-            <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
-                <img src="./images/item-3.jpg" alt="item" class="img-fluid p-3">
-                <a href="Product-3.php"><h6>VT-SRS01 Snow & Rain Sensor, For Industrial</h6></a>
-                <p>Price: 13500</p>
-            </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="container" style="margin-top: 30px;">
-        <h2>Wind speed  sensor</h2>
-        <div class="container" style="margin-top:30px">
-            <div class="row" style="row-gap: 10px;">
-            <div class="col-md-3">
-            <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
-                <img src="./images/item-4.jpg" alt="item" class="img-fluid p-3"style="height: 170px;width:200px;">
-                <a href="Product-4.php"><h6>Wind Speed And Direction Sensor</h6></a>
-                <p>Price: 25000</p>
+<body>
 
-            </div>
-            </div>
-            <div class="col-md-3">
-            <div class="grid-item text-center p-3"style="background-color: #D9D9D9;">
-                <img src="./images/item-5.jpg" alt="item" class="img-fluid p-3">
-                <a href="Product-5.php"><h6>Wind Speed Sensor, Anemometer</h6></a>
-                <p>Price: 6900</p>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(7, 105, 16);">
+    <img class="navbar-brand" src="./images/logo.jpg" style="width:200px; height: 60px; border-radius: 20px;">
+    <button class="clr navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="brgclr navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="d-flex justify-content-center align-items-center" style="width: 70vw;">
+            <div>
+                <ul class="navbar-nav mr-auto mt-2">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.php" style="color: #FFFFFF;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.php" style="color: #FFFFFF;">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Product.php" style="color: #FFFFFF;">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#contact" style="color: #FFFFFF;">Contact us</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        </div>  
+        <?php if ($user_logged_in && !empty($profile_picture)): ?>
+            <a href="profile.php">
+                <img src="<?= htmlspecialchars($profile_picture); ?>" alt="Profile" style="width: 50px; height: 50px; border-radius: 50%; background-color: white; object-fit: cover; border: 2px solid #ffffff; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; margin-left: 240px; position: relative;">
+            </a>
+        <?php else: ?>
+            <div class="form-inline login-btn">
+                <a class="nav-item text-center text-white" href="login.php">Log In</a>
+            </div>
+        <?php endif; ?>
     </div>
-    <footer id="main-footer">
-        <p>© 2023 Irrigation Hub. All rights reserved.</p>
-    </footer>
+</nav>
+
+<div class="container mt-4">
+    <h2>Available Products</h2>
+    <?php if ($user_logged_in): ?>  <!-- Check if user is logged in -->
+        <div class="row">
+            <?php foreach ($products as $row): ?>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center p-3" style="background-color: #D9D9D9;">
+                        <img src="Admin/uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid p-3" alt="<?= htmlspecialchars($row['name']) ?>">
+                        <h6><a href="product-detail.php?id=<?= $row['id'] ?>"><?= htmlspecialchars($row['name']) ?></a></h6>
+                        <p>Price: Rs. <?= number_format($row['price'], 2) ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>  
+        <p class="text-danger">You need to <a href="login.php">log in</a> to view available products.</p>
+    <?php endif; ?>
+</div>
+
+<footer id="main-footer">
+    <p>© 2025 Irrigation Hub. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
