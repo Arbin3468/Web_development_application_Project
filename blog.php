@@ -1,3 +1,32 @@
+<?php
+session_start();
+include 'config/db.php'; // Ensure database connection
+
+$user_logged_in = isset($_SESSION["user_id"]);
+$profile_picture = ""; // Remove default pic handling
+
+if ($user_logged_in) {
+    $user_id = $_SESSION["user_id"]; 
+
+    $query = "SELECT profile_picture FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($db_profile_picture);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Assign only if a valid path exists
+        if (!empty($db_profile_picture)) {
+            $profile_picture = $db_profile_picture;
+        }
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,14 +63,17 @@
             color: #ffffff;
         }
 
-        .login-btn a {
+        .login-btn a{
             text-decoration: none;
-            width: 8vw;
-            font-size: 20px;
+            width:8vw;
             font-weight: bold;
-            border-radius: 15px;
-            background-color: #0082ce;
-        }
+            font-size: 20px;
+            border-radius: 10px;
+            background-color:#183647;
+            margin-left: 60px;
+            position: absolute;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
         .clr{
             background-color:#0082CE;
             color: #D9D9D9;
@@ -62,29 +94,32 @@
     overflow: hidden;
 }
 .welcome{
-    letter-spacing: 7%;
-    margin-top: 22vh;
-    width: 60%;
-    min-height: 50vh;
+    padding-top: 12px;
+    text-align: center;
+    letter-spacing: 2%;
+    margin-top: 15vh;
+    width: 50%;
     height: 45vh;
     background-color:rgba(182, 223, 186,.60);
+    border-radius: 10px;
 }
 .welcome h3 {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 2vw;
-            line-height: 35px;
-            align-items: center;
-            text-align: center;
-            letter-spacing: 0.05em;
-            color: #178B23;
+    margin-top: 30px;
+    margin-left: -300px;
+    font-weight: bold;
+    letter-spacing: 5%;
+    width: 60vw;
+    height: 10vh;
+    font-size: 200%;
         }
 .welcome p {
+        
+            margin-top: 5px;
             font-style: normal;
             font-weight: 500;
-            font-size: 1.5vw;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            font-size: 1 vw;
+            height: 40px;
+            letter-spacing: 0.05em;
             color: #432F24;
         }
         .showcase {
@@ -126,16 +161,16 @@
             font-style: normal;
             font-weight: 500;
             font-size: 1.6em;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            line-height: 45px;
+            letter-spacing: 0em;
             color: #432F24;
         }
         #main2 p {
             font-style: normal;
             font-weight: 500;
             font-size: 1.6em;
-            line-height: 35px;
-            letter-spacing: 0.1em;
+            line-height: 45px;
+            letter-spacing: 0em;
             color: #432F24;
         }
 
@@ -208,53 +243,61 @@ color: #432F24;
         width: 20vw;
     }
     }
-        }
+
+       }
     </style>
     <title>Irrigation hub</title>
 </head>
 <body>
-    <div class="images">
-    <nav class="navbar navbar-expand-lg navbar-light bg-ligh" style="background-color: #178B23;">
-        <img class="navbar-brand" src="../images/logo.jpg" style="width:200px; height: 60px;">
-        <button class="clr navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+<div class="images">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color:rgb(7, 105, 16);">
+            <img class="navbar-brand" src="./images/logo.jpg" style="width:200px; height: 60px; border: radius 20px;">
+            <button class="clr navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=" brgclr navbar-toggler-icon" ></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <div class="d-flex justify-content-center align-items-center" style="width: 70vw;">
+                <div  class="d-flex justify-content-center align-items-center" style="width: 70vw;">
                     <div>
                         <ul class="navbar-nav mr-auto mt-2">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html" style="color: #FFFFFF;">Home </a>
+                                <a class="nav-link" href="index.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Home </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="blog.html" style="color: #FFFFFF;">Blog</a>
+                                <a class="nav-link" href="blog.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Product.html" style="color: #FFFFFF;">Products</a>
+                                <a class="nav-link" href="Product.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#contact" style="color: #FFFFFF;">Contact us</a>
+                                <a class="nav-link" href="index.php#contact" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Contact us</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            <div class="form-inline login-btn">
-                <a class="nav-item text-center" href="login.html" style="color: #FFFFFF;">Login</a>
-            </div>
+                <?php if ($user_logged_in && !empty($profile_picture)): ?>
+                <a href="profile.php">
+                <a href="profile.php">
+                <img src="<?php echo htmlspecialchars($profile_picture); ?>"  alt="Profile" style="width: 50px; height: 50px;  border-radius: 50%; background-color: white; object-fit: cover; /* Ensures images scale properly */ border: 2px solid #ffffff;
+                                                                                                   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; margin-left: 240px; position: relative;">
+                </a>
+            <?php else: ?>
+                <div class="form-inline login-btn">
+                    <a class="nav-item text-center text-white" href="login.php">Log In</a>
+                </div>
+            <?php endif; ?>
         </div>
     </nav>
     
         <div class="container">
-        <div class="welcome text-center">
-            <h3>What is a Smart Irrigation System?</h3>
+        <div class="welcome text-align:center">
+            <h3>Smart Irrigation System</h3>
             <p class="font-weight-bold">Smart irrigation systems are a combination of advanced technology of sprinklers with nozzles that improve coverage and watering irrigation controllers and water conservation systems that monitor moisture-related conditions on your property and automatically adjust watering to optimal levels.</p>
     </div>
     </div>
     </div>
     <div class="showcase">
         <section id="main">
-            <a href="../images/Blog-1.jpg"><img src="../images/Blog-1.jpg" alt="blog" image width="100%"></a>
+            <a href="./images/Blog-1.jpg"><img src="./images/Blog-1.jpg" alt="blog" image width="100%"></a>
         </section>
         <aside id="sidebar">
             <p>Agriculture is vital for the economy, and meeting the increasing food demands and adapting to consumer preferences is challenging. Technological advancements like smart irrigation offer a promising solution. By using data-intensive methods, smart irrigation maximizes productivity while minimizing environmental impact. Modern agriculture generates valuable data from sensors, enabling better decision-making, resource optimization, and achieving sector objectives efficiently.</p>
@@ -262,7 +305,7 @@ color: #432F24;
     </div>
     <div class="showcase">
         <aside id="sidebar2">
-            <a href="../images/Blog-2.jpg"><img src="../images/Blog-2.jpg" alt="blog" image width="100%"></a>
+            <a href="./images/Blog-2.jpg"><img src="./images/Blog-2.jpg" alt="blog" image width="100%"></a>
         </aside>
         <section id="main2">
             <p>Creating a beautiful, lush landscape is a dream for many homeowners and garden enthusiasts. However, achieving that vibrant greenery often comes at a cost—water consumption. Traditional irrigation methods can be inefficient, resulting in water waste and higher utility bills.</p>

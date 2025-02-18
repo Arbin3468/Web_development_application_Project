@@ -1,3 +1,31 @@
+<?php
+session_start();
+include 'config/db.php'; // Ensure database connection
+
+$user_logged_in = isset($_SESSION["user_id"]);
+$profile_picture = ""; // Remove default pic handling
+
+if ($user_logged_in) {
+    $user_id = $_SESSION["user_id"]; 
+
+    $query = "SELECT profile_picture FROM users WHERE id = ?";
+    $stmt = $conn->prepare($query);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($db_profile_picture);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Assign only if a valid path exists
+        if (!empty($db_profile_picture)) {
+            $profile_picture = $db_profile_picture;
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +43,9 @@
     <title>Irrigation hub</title>
 </head>
 <body>       
-    <div class="images">
-        <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #178B23;">
-            <img class="navbar-brand" src="./images/logo.jpg" style="width:200px; height: 60px;">
+<div class="images">
+        <nav class="navbar navbar-expand-lg navbar-light " style="background-color:rgb(7, 105, 16);">
+            <img class="navbar-brand" src="./images/logo.jpg" style="width:200px; height: 60px; border: radius 20px;">
             <button class="clr navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class=" brgclr navbar-toggler-icon" ></span>
             </button>
@@ -26,24 +54,31 @@
                     <div>
                         <ul class="navbar-nav mr-auto mt-2">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html" style="color: #FFFFFF;">Home </a>
+                                <a class="nav-link" href="index.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Home </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="blog.html" style="color: #FFFFFF;">Blog</a>
+                                <a class="nav-link" href="blog.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="Product.html" style="color: #FFFFFF;">Products</a>
+                                <a class="nav-link" href="Product.php" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#contact" style="color: #FFFFFF;">Contact us</a>
+                                <a class="nav-link" href="#contact" style="color: #FFFFFF; text-shadow: 0px 4px 4px rgba(0.4, 0.3, 0.5, 0.25);">Contact us</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="form-inline login-btn " >
-                    <a class="nav-item  text-center " href="login.html" style="color: #FFFFFF;">login</a>
+                <?php if ($user_logged_in && !empty($profile_picture)): ?>
+                <a href="profile.php">
+                <a href="profile.php">
+                <img src="<?php echo htmlspecialchars($profile_picture); ?>" class="profile-pic" alt="Profile">
+                </a>
+            <?php else: ?>
+                <div class="form-inline login-btn">
+                    <a class="nav-item text-center text-white" href="login.php">Log In</a>
                 </div>
-            </div>
+            <?php endif; ?>
+    </div>
         </nav>
         <div class="container center" >
             <div class="welcome text-center">
