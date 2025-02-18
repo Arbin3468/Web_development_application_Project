@@ -208,11 +208,6 @@ $conn->close();
         <form action="profile.php" method="POST" class="mt-4">
             <button name="profile" class="btn btn-secondary">Profile</button>
         </form>
-
-        <!-- Form for logout -->
-        <form action="profile.php" method="POST" class="mt-4">
-            <button type="submit" name="logout" class="btn btn-secondary">Logout</button>
-        </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>

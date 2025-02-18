@@ -1,14 +1,13 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    // Redirect to the login page if not logged in
+// Check if the user is logged in, otherwise redirect to login page
+if (!isset($_SESSION['loggedin'])) {
     header("Location: login.php");
     exit();
 }
 
-// Continue with the rest of your code for managing products
+// Include the database connection
 include 'db.php';
 $result = $conn->query("SELECT * FROM products");
 ?>
@@ -70,7 +69,7 @@ $result = $conn->query("SELECT * FROM products");
                         </td>
                         <td>
                             <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                            <a href="#" class="btn btn-danger btn-sm delete-btn" data-id="<?= $row['id'] ?>" data-name="<?= htmlspecialchars($row['name']) ?>">Delete</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -92,12 +91,27 @@ $result = $conn->query("SELECT * FROM products");
             </div>
         </div>
     </div>
-    <!-- Logout Form -->
-    <form action="login.php" method="POST" class="mt-4">
-            <button type="submit" name="logout" class="btn btn-secondary">Logout</button>
-        </form>
+
+    <!-- Modal for Delete Confirmation -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete the product <span id="productName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-danger" id="confirmDelete">Yes, Delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -119,7 +133,7 @@ $result = $conn->query("SELECT * FROM products");
                 var minimum_order_quantity = $(this).data("minimum_order_quantity");
 
                 $("#descModalLabel").text(title);
-                $("#descModalBody").html(` 
+                $("#descModalBody").html(`
                     <p><strong>Description:</strong> ${description}</p>
                     <div class="row">
                         <div class="col-md-6">
@@ -139,6 +153,23 @@ $result = $conn->query("SELECT * FROM products");
                     </div>
                 `);
                 $("#descModal").modal("show");
+            });
+
+            $(".delete-btn").click(function (event) {
+                event.preventDefault();
+                var productId = $(this).data("id");
+                var productName = $(this).data("name");
+
+                // Set the product name in the modal
+                $("#productName").text(productName);
+                
+                // Show the modal
+                $("#deleteModal").modal("show");
+
+                // Confirm delete action
+                $("#confirmDelete").click(function () {
+                    window.location.href = "delete.php?id=" + productId; // Redirect to delete.php with the product ID
+                });
             });
         });
     </script>
