@@ -26,6 +26,7 @@ $result = $conn->query("SELECT * FROM products");
         <h2 class="text-center mb-4">Product List</h2>
         <div class="text-right mb-3">
             <a href="add.php" class="btn btn-primary">Add New Product</a>
+            <button class="btn btn-danger" id="logoutBtn">Logout</button>
         </div>
         <table class="table table-bordered table-striped text-center">
             <thead>
@@ -49,17 +50,8 @@ $result = $conn->query("SELECT * FROM products");
                             <a href="#" class="text-primary read-more" 
                                 data-id="<?= $row['id'] ?>" 
                                 data-title="<?= htmlspecialchars($row['name']) ?>" 
-                                data-description="<?= htmlspecialchars($row['description']) ?>"
-                                data-brand="<?= htmlspecialchars($row['brand']) ?>"
-                                data-type="<?= htmlspecialchars($row['type']) ?>"
-                                data-temperature_range="<?= htmlspecialchars($row['temperature_range']) ?>"
-                                data-operating_voltage="<?= htmlspecialchars($row['operating_voltage']) ?>"
-                                data-output_voltage="<?= htmlspecialchars($row['output_voltage']) ?>"
-                                data-operating_current="<?= htmlspecialchars($row['operating_current']) ?>"
-                                data-interface="<?= htmlspecialchars($row['interface']) ?>"
-                                data-response_time="<?= htmlspecialchars($row['response_time']) ?>"
-                                data-country_of_origin="<?= htmlspecialchars($row['country_of_origin']) ?>"
-                                data-minimum_order_quantity="<?= htmlspecialchars($row['minimum_order_quantity']) ?>">
+                                data-description="<?= htmlspecialchars($row['description']) ?>">
+
                                 Read More
                             </a>
                         </td>
@@ -103,11 +95,32 @@ $result = $conn->query("SELECT * FROM products");
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete the product <span id="productName"></span>?
+                    Are you sure you want to delete <span id="productName"></span>?
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-danger" id="confirmDelete">Yes, Delete</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <a href="logout.php" class="btn btn-danger">Yes, Logout</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -121,36 +134,10 @@ $result = $conn->query("SELECT * FROM products");
                 event.preventDefault();
                 var title = $(this).data("title");
                 var description = $(this).data("description");
-                var brand = $(this).data("brand");
-                var type = $(this).data("type");
-                var temperature_range = $(this).data("temperature_range");
-                var operating_voltage = $(this).data("operating_voltage");
-                var output_voltage = $(this).data("output_voltage");
-                var operating_current = $(this).data("operating_current");
-                var interface = $(this).data("interface");
-                var response_time = $(this).data("response_time");
-                var country_of_origin = $(this).data("country_of_origin");
-                var minimum_order_quantity = $(this).data("minimum_order_quantity");
 
                 $("#descModalLabel").text(title);
                 $("#descModalBody").html(`
                     <p><strong>Description:</strong> ${description}</p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Brand:</strong> ${brand}</p>
-                            <p><strong>Type:</strong> ${type}</p>
-                            <p><strong>Temperature Range:</strong> ${temperature_range}</p>
-                            <p><strong>Operating Voltage:</strong> ${operating_voltage}</p>
-                            <p><strong>Output Voltage:</strong> ${output_voltage}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Operating Current:</strong> ${operating_current}</p>
-                            <p><strong>Interface:</strong> ${interface}</p>
-                            <p><strong>Response Time:</strong> ${response_time}</p>
-                            <p><strong>Country of Origin:</strong> ${country_of_origin}</p>
-                            <p><strong>Minimum Order Quantity:</strong> ${minimum_order_quantity}</p>
-                        </div>
-                    </div>
                 `);
                 $("#descModal").modal("show");
             });
@@ -160,16 +147,14 @@ $result = $conn->query("SELECT * FROM products");
                 var productId = $(this).data("id");
                 var productName = $(this).data("name");
 
-                // Set the product name in the modal
                 $("#productName").text(productName);
-                
-                // Show the modal
                 $("#deleteModal").modal("show");
 
-                // Confirm delete action
-                $("#confirmDelete").click(function () {
-                    window.location.href = "delete.php?id=" + productId; // Redirect to delete.php with the product ID
-                });
+                $("#confirmDelete").attr("href", "delete.php?id=" + productId);
+            });
+
+            $("#logoutBtn").click(function () {
+                $("#logoutModal").modal("show");
             });
         });
     </script>
