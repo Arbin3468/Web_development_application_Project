@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // Redirect to the login page if not logged in
+    header("Location: login.php");
+    exit();
+}
+
+// Continue with the rest of your code for managing products
 include 'db.php';
 $result = $conn->query("SELECT * FROM products");
 ?>
@@ -82,6 +92,12 @@ $result = $conn->query("SELECT * FROM products");
             </div>
         </div>
     </div>
+    <!-- Logout Form -->
+    <form action="login.php" method="POST" class="mt-4">
+            <button type="submit" name="logout" class="btn btn-secondary">Logout</button>
+        </form>
+    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -103,7 +119,7 @@ $result = $conn->query("SELECT * FROM products");
                 var minimum_order_quantity = $(this).data("minimum_order_quantity");
 
                 $("#descModalLabel").text(title);
-                $("#descModalBody").html(`
+                $("#descModalBody").html(` 
                     <p><strong>Description:</strong> ${description}</p>
                     <div class="row">
                         <div class="col-md-6">
